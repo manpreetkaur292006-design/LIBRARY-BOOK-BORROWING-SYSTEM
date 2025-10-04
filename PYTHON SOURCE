@@ -1,0 +1,69 @@
+"""
+COMPUTER SCIENCE FUNDAMENTALS AND CAREER PATHWAYS
+B.TECH CSE CORE SECTION(A) SEMESTER-I
+COURSE CODE: ETCCCP105
+ASSIGNMENT NO.: 1
+ASSIGNMENT TITLE: DESIGN AND SIMULATE A REAL-WORLD PROCESS USING FLOWCHART AND PSEUDO-CODE
+SUBMITTED BY: MANPREET KAUR
+SUBMITTED TO: RAJESH KUMAR SIR
+"""
+
+# LIBRARY BOOK BORROWING SYSTEM
+
+book_list=["NP Bali","Preeti Arora","Sumita Arora","HK Dass","Engg. Physics","Computer Fundamentals","Web development"]
+# book_list is a list which contains all the books that are available in the library
+
+borrow_book=[]
+# borrow_book is an empty list which will contain the list of all the books that are borrowed by the student
+
+book_limit=5 # book_limit contain the maximum number of books that a student can borrow at a time
+day_limit=15 # day_limit contain the maximum number of days that a student can borrow a book
+
+print("----WELCOME TO KRMU LIBRARY----")
+print("1. Show available books")
+print("2. Book issue")
+print("3. Book return")
+print("4. Exit KRMU Library")
+
+while True: # this while loop will run unil the user doen't exit the library
+
+  choice=int(input("Enter your choice:"))  # enter your choice according to your requirement
+  
+  if choice==1:  # when choice is 1 then it will print all the available books in our library
+    print("Available books:")
+    print(book_list) 
+ 
+  elif choice==2:   # when choice is 2 
+    book_search=input("Enter book you want to issue:") # it will take input from the use that which book the student want to issue
+    if len(borrow_book)!=book_limit: # if this condition is true then it will check for the book availability
+      if book_search in book_list: # if book is available then it will be issued
+        book_list.remove(book_search)   
+        borrow_book.append(book_search)
+        print("Book issued successfully !!")
+        print("your issued books are:",borrow_book)
+      else:   # if the book is not available then it will be print a message saying that the book is not available in the library
+        print("Book not available !!") 
+    else: # if the student has already issued 5 books then this message will be printed and book will not be issued
+      print("You have reached the book limit. Book cannot be issued !!")
+  elif choice==3:   # when choice is 3 then it will take an input that which book you want to return and then it will be returned
+    book_return=input("Enter the book to be returned:")
+    if book_return in borrow_book: #if the book is in the borrow_book list then it will be retuned
+      print("please enter the number of days you have borrowed the book:")
+      borrow_days=int(input())
+      borrow_book.remove(book_return)
+      book_list.append(book_return)
+      if borrow_days>day_limit: # if the student has borrowed the book for more than 15 days then it will print a message and fine will be calculated and displayed
+        print("you have exceeded the day limit. you have to pay the fine of Rs.10 per day !!")
+        fine=(borrow_days-day_limit)*10
+        print("you fine amount is: Rs.",fine)
+        print("book returned successfully!!")
+      else: # otherwise book will be returned successfully
+         print("book returned successfully!!")
+  
+  elif choice==4: # enter choice 4 to exit the KRMU library
+    print("Thank you for visiting KRMU Library.")
+    print("Exit")
+    break
+  
+  else: # if you enter anything other than 1,2,3,4 then it will print an invalid choice message
+    print("Invalid choice !!")
